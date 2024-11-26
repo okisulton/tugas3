@@ -1,56 +1,66 @@
 <template>
   <ion-page>
-    <ion-header :translucent="true">
+    <ion-header>
       <ion-toolbar>
-        <ion-title>Blank</ion-title>
+        <ion-title>Cryptocurrency Prices</ion-title>
       </ion-toolbar>
     </ion-header>
-
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Blank</ion-title>
-        </ion-toolbar>
-      </ion-header>
-
-      <div id="container">
-        <strong>Ready to create an app?</strong>
-        <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-content class="content">
+      <div class="container">
+        <ion-button shape="round" @click="fetchData">Refresh</ion-button>
+        <CryptoList :cryptos="cryptos" />
+        <!-- Tambahkan spacer untuk ruang ekstra -->
+        <div class="spacer"></div>
       </div>
     </ion-content>
   </ion-page>
 </template>
 
-<script setup lang="ts">
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+<script>
+import CryptoList from '@/components/CryptoList.vue';
+import axios from 'axios';
+
+export default {
+  name: 'Home',
+  components: { CryptoList },
+  data() {
+    return {
+      cryptos: [],
+    };
+  },
+  methods: {
+    async fetchData() {
+      try {
+        const response = await axios.get('https://api.coinlore.net/api/tickers/');
+        this.cryptos = response.data.data;
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    },
+  },
+  mounted() {
+    this.fetchData();
+  },
+};
 </script>
 
-<style scoped>
-#container {
+<style>
+/* Container utama */
+.container {
+  padding: 0;
+  margin: 0 auto;
   text-align: center;
-  
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  max-width: 100%;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.content {
+  height: calc(100vh - var(--ion-safe-area-top) - var(--ion-safe-area-bottom));
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-  
-  color: #8c8c8c;
-  
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+.spacer {
+  height: 50px;
 }
 </style>
