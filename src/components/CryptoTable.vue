@@ -117,35 +117,35 @@
         justify-content: space-between;
         align-items: center;
         padding: 8px 16px;
-        width: 100%; /* memastikan container mengambil seluruh lebar */
+        width: 100%;
     }
 
     ion-grid {
-        width: 100%; /* memastikan grid mengambil seluruh lebar */
-        padding: 0;  /* menghapus padding default agar lebar grid penuh */
-        margin: 0;   /* menghapus margin default */
+        width: 100%;
+        padding: 0;
+        margin: 0;
     }
 
     ion-row {
         display: flex;
-        justify-content: space-between; /* memastikan kolom terdistribusi merata */
-        width: 100%; /* memastikan row mengambil seluruh lebar */
+        justify-content: space-between;
+        width: 100%;
     }
 
     ion-col {
-        background-color: inherit; /* mewarisi latar belakang dari ion-item */
+        background-color: inherit;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 0; /* menghapus padding agar kolom lebih lebar */
-        width: 33.33%; /* memastikan setiap kolom memiliki lebar 1/3 dari grid */
+        padding: 0;
+        width: 33.33%;
     }
 
     .item-rank, .item-name, .item-usd {
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: inherit; /* mewarisi latar belakang dari parent */
+        background-color: inherit;
         padding: 8px 0;
     }
 
@@ -161,4 +161,3 @@
         color: #000;
     }
 </style>
-  
